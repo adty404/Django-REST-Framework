@@ -3,7 +3,7 @@ from rest_framework import generics
 from .models import Product
 from .serializers import ProductSerializer
 
-class ProductCreateAPIView(generics.CreateAPIView):
+class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
@@ -16,7 +16,7 @@ class ProductCreateAPIView(generics.CreateAPIView):
             content = title
         serializer.save(content=content)
 
-product_create_view = ProductCreateAPIView.as_view()
+product_list_create_view = ProductListCreateAPIView.as_view()
 
 class ProductDetailAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
@@ -24,3 +24,12 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
     # lookup_field = 'pk'
 
 product_detail_view = ProductDetailAPIView.as_view()
+
+class ProductListAPIView(generics.ListAPIView):
+    '''
+    Not gonna use this view, but it's here for reference
+    '''
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+product_list_view = ProductListAPIView.as_view()
