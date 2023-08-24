@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from .models import Product
 from .serializers import ProductSerializer
 
+# generic class-based views
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -62,6 +63,8 @@ product_destroy_view = ProductDestroyAPIView.as_view()
 
 # product_list_view = ProductListAPIView.as_view()
 
+
+# mixins
 class ProductMixinView(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
@@ -93,6 +96,7 @@ class ProductMixinView(
 
 product_mixin_view = ProductMixinView.as_view()
 
+# function based
 @api_view(['GET', 'POST'])
 def product_alt_view(request, pk=None, *args, **kwargs):
     method = request.method
